@@ -1,0 +1,77 @@
+{% extends '_base.html' %}
+
+{% block title %} Home {% endblock title%}
+
+{% block content %}
+
+
+<div class="row">
+<h4> <span class="badge bg-secondary">List of Songs</span></h4>
+&nbsp;
+<ul class="nav nav-pills">
+<li class="nav-item">
+<a class="nav-link" aria-current="page" href="{% url 'add_song' %}"> Add New Song</a>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="{% url 'add_song' %}">Add New Song</a>
+</li>
+</ul>
+
+
+&nbsp;
+<div>
+{% if Songs %}
+<table class="table table-bordered striped table-hover">
+<thead>
+<tr>
+<th scope="col">id</th>
+<th scope="col">genre</th>
+<th scope="col">title</th>
+<th scope="col">release_date</th>
+<th scope="col">artist_id</th>
+<th scope="col"></th>
+</tr>
+</thead>
+<tbody>
+{% for Song in Songs %}
+<tr>
+<td>{{Song.id}}</td>
+<td>{{Song.genre}}</td>
+<td>{{Song.title}}</td>
+<td>{{Song.release_date}}</td>
+<td>{{Song.artist_id}}</td>
+<td>
+<a href="song-details/{{song.id}}" class="btn btn btn-success" type="button"><i class="bi bi-pencil"></i></a>
+<a href="song-delete/{{song.id}}" class="btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button"><i class="bi bi-trash"></i></a>
+</td>
+</tr>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h1 class="modal-title fs-5" id="exampleModalLabel">Delete Confirmation</h1>
+<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+Are you sure you want to delete {{Song.id}} ?
+</div>
+<div class="modal-footer">
+<a href="song-delete/{{song.id}}" type="button" class="btn btn-primary">Yes</a>
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+</div>
+</div>
+</div>
+</div>
+{% endfor %}
+</tbody>
+</table>
+
+
+{% else %}
+No Song data found in database
+{% endif %}
+</div>
+</div>
+{% endblock content %}

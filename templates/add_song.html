@@ -1,0 +1,33 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Add Song {% endblock title%}
+
+{% block content %}
+<h4>Add New Song</h4>
+
+<form method="POST" novalidate>
+{% csrf_token %}
+<div class="row mb-3">
+<div class="form-group col-md-6 mb-0">
+{{ form.id | as_crispy_field}}
+</div>
+<div class="form-group col-md-2 mb-0">
+{{ form.genre | as_crispy_field}}
+</div>
+<div class="form-group col-md-3 mb-0">
+{{ form.title | as_crispy_field}}
+</div>
+</div>
+<div class="row mb-3">
+<div class="form-group col-md-4 mb-0">
+{{ form.release_date | as_crispy_field}}
+</div>
+<div class="form-group col-md-3 mb-0">
+{{ form.artist_id | as_crispy_field}}
+</div>
+</div>
+<button type="submit" class="btn btn-primary">Save</button>
+<a href="{% url 'song' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock content %}

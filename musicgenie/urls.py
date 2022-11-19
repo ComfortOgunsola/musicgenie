@@ -1,21 +1,18 @@
-"""musicgenie URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
+from music_app.views import LandingPageView,ArtistCreateView,ArtistListView,ArtistUpdateView,deleteArtist
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',LandingPageView.as_view(), name='home'),
+    path('artists',ArtistListView.as_view(),name='artists'),
+    path('add_artist',ArtistCreateView.as_view(),name='add_artist'),
+    path('artist-details/<int:pk>', ArtistUpdateView.as_view(),name='artist_details'),
+    path('artist-delete/<int:pk>', deleteArtist,name='delete_artist'), 
 ]
+
+
+
+
+
